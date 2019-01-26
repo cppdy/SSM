@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jeff.entity.EasyUIDatagrid;
 import com.jeff.entity.User;
@@ -25,18 +28,29 @@ public class UserServlet extends HttpServlet {
      */
     private static final long serialVersionUID = 1L;
 
-    private UserService userService = new UserServiceImpl();
+    private UserService userService;
+
+    @Override
+    public void init() throws ServletException {
+        // 对service实例化
+        // ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        // spring和web整合后所有信息都存放在webApplicationContext
+        ApplicationContext ac = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+        userService = ac.getBean("userService", UserServiceImpl.class);
+    }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String loginName = req.getParameter("loginName");
-        /*if (loginName != null && !loginName.equals("")) {
-            loginName = new String(loginName.getBytes("iso-8859-1"), "utf-8");
-        }*/
+        /*
+         * if (loginName != null && !loginName.equals("")) { loginName = new
+         * String(loginName.getBytes("iso-8859-1"), "utf-8"); }
+         */
         String name = req.getParameter("name");
-        /*if (name != null && !name.equals("")) {
-            name = new String(name.getBytes("iso-8859-1"), "utf-8");
-        }*/
+        /*
+         * if (name != null && !name.equals("")) { name = new String(name.getBytes("iso-8859-1"), "utf-8");
+         * }
+         */
         int pageSize = Integer.parseInt(req.getParameter("rows"));
         int pageNumber = Integer.parseInt(req.getParameter("page"));
         User user = new User();

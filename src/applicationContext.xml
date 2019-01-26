@@ -3,14 +3,33 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-        
-	<!-- id 表示获取到对象标识 class 创建哪个类的对象 -->
-    <bean id="user" class="com.jeff.entity.User">
-    	<!-- 给Bean 的属性赋值(注入) -->
-    	<property name="id" value="1"></property>
-    	<property name="loginName" value="jeff"></property>
-    	<property name="phone" value="13000000000"></property>
-    	<property name="email" value="jeff@163.com"></property>
-    </bean>    
+
+	<!-- 数据源封装类 .数据源:获取数据库连接,spring-jdbc.jar中 -->
+	<bean id="dataSouce" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/ssm"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<!-- 创建SqlSessionFactory对象 -->
+	<bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据库连接信息来源于dataSource -->
+		<property name="dataSource" ref="dataSouce"></property>
+		<!-- 下划线转驼峰 -->
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<!-- 给包下所有类起别名,别名为类名,不区分大小写 -->
+		<property name="typeAliasesPackage" value="com.jeff.entity"></property>
+	</bean>
+	<!-- 扫描器相当于mybatis.xml中 mappers下package标签,扫描com.bjsxt.mapper包后会给对应接口创建对象 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 要扫描哪个包 -->
+		<property name="basePackage" value="com.jeff.mapper"></property>
+		<!-- 和factory产生关系 -->
+		<property name="sqlSessionFactory" ref="factory"></property>
+	</bean>
+	<!-- 由spring管理service实现类 -->
+	<bean id="userService" class="com.jeff.service.impl.UserServiceImpl">
+		<property name="userMapper" ref="userMapper"></property>
+	</bean>  
         
 </beans>

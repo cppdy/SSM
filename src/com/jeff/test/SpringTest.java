@@ -8,6 +8,7 @@ import com.jeff.entity.User;
 public class SpringTest {
 
     public static void main(String[] args) {
+        // ClassPathXmlApplicationContext 默认去classes文件夹根目录开始寻找
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         User user = ac.getBean("user", User.class);
         System.out.println(user);
