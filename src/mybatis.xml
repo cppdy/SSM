@@ -32,8 +32,8 @@
 	</environments>
 
 	<mappers>
-		<!-- 映射文件路径 -->
-		<mapper resource="com/jeff/mapper/UserMapper.xml" />
+		<!-- 扫描包 -->
+		<package name="com.jeff.mapper"/>
 	</mappers>
 
 </configuration>

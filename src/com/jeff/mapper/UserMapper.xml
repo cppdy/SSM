@@ -2,14 +2,33 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- namesapce:理解成实现类的全路径(包名+类名) -->
-<mapper namespace="a.b">
-	<!-- id:方法名 parameterType:定义参数类型 resultType:返回值类型. 如果方法返回值是list, 在resultType中写List的泛型, 因为mybatis 对jdbc 封装,一行一行读取数据 -->
-	<select id="selAll" resultType="user">
+<mapper namespace="com.jeff.mapper.UserMapper">
+	<select id="selByPage" resultType="user">
 		select * from user
+		<where>
+			<if test="param1.loginName!=null and param1.loginName!=''">
+				<bind name="param1.loginName" value="'%'+param1.loginName+'%'"></bind>
+				<![CDATA[and login_name like #{param1.loginName}]]>
+			</if>
+			<if test="param1.name!=null and param1.name!=''">
+				<bind name="param1.name" value="'%'+param1.name+'%'"></bind>
+				<![CDATA[and name like #{param1.name}]]>
+			</if>
+		</where>
+		limit #{param2.pageStart},#{param2.pageSize}
 	</select>
 
-	<select id="selById" resultType="user">
-		select * from user where id=#{0}
+	<select id="selCountByPageInfo" resultType="long">
+		select count(*) from user
+		<where>
+			<if test="param1.loginName!=null and param1.loginName!=''">
+				<bind name="param1.loginName" value="'%'+param1.loginName+'%'"></bind>
+				<![CDATA[and login_name like #{param1.loginName}]]>
+			</if>
+			<if test="param1.name!=null and param1.name!=''">
+				<bind name="param1.name" value="'%'+param1.name+'%'"></bind>
+				<![CDATA[and name like #{param1.name}]]>
+			</if>
+		</where>
 	</select>
 </mapper>
