@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+	<!-- id 表示获取到对象标识 class 创建哪个类的对象 -->
+    <bean id="user" class="com.jeff.entity.User">
+    	<!-- 给Bean 的属性赋值(注入) -->
+    	<property name="id" value="1"></property>
+    	<property name="loginName" value="jeff"></property>
+    	<property name="phone" value="13000000000"></property>
+    	<property name="email" value="jeff@163.com"></property>
+    </bean>    
+        
+</beans>
