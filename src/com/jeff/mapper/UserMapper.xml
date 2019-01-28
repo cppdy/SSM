@@ -6,6 +6,7 @@
 	<select id="selByPage" resultType="user">
 		select * from user
 		<where>
+			status!=2
 			<if test="param1.loginName!=null and param1.loginName!=''">
 				<bind name="param1.loginName" value="'%'+param1.loginName+'%'"></bind>
 				<![CDATA[and login_name like #{param1.loginName}]]>
@@ -31,4 +32,41 @@
 			</if>
 		</where>
 	</select>
+
+	<insert id="insUser" parameterType="user">
+		insert into user values(
+			default,#{loginName},#{phone},#{email},#{password},#{salt},#{nickName},#{name},#{sex},#{birthday},
+			#{photoUrl},#{userType},#{status},#{createTime},#{createdBy},#{updateTime},#{updatedBy}
+		)
+	</insert>
+
+	<!-- <delete id="delUser" parameterType="int">
+		delete from user where id=#{id}
+	</delete> -->
+
+	<update id="delUser" parameterType="int">
+		update user set status=2 where id=#{id}
+	</update>
+	
+	<select id="selUserById" parameterType="int" resultType="user">
+		select * from user where id=#{id}
+	</select>
+
+	<update id="updUser" parameterType="user">
+		update user set
+			login_name=#{loginName},
+			phone=#{phone},
+			email=#{email},
+			nick_name=#{nickName},
+			name=#{name},
+			sex=#{sex},
+			birthday=#{birthday},
+			photo_url=#{photoUrl},
+			user_type=#{userType},
+			status=#{status},
+			update_time=#{updateTime},
+			updated_by=#{updatedBy}
+		where id=#{id}
+	</update>
+	
 </mapper>

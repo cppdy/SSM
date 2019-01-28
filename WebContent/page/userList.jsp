@@ -4,12 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../static/js/easyui/themes/default/easyui.css">   
-<link rel="stylesheet" type="text/css" href="../static/js/easyui/themes/icon.css">   
-<script type="text/javascript" src="../static/js/easyui/jquery.min.js"></script>   
-<script type="text/javascript" src="../static/js/easyui/jquery.easyui.min.js"></script> 
-<script type="text/javascript" src="../static/js/easyui/locale/easyui-lang-zh_CN.js"></script> 
-<script type="text/javascript" src="../static/js/main.js"></script> 
+<link rel="stylesheet" type="text/css" href="static/js/easyui/themes/default/easyui.css">   
+<link rel="stylesheet" type="text/css" href="static/js/easyui/themes/icon.css">   
+<script type="text/javascript" src="static/js/easyui/jquery.min.js"></script>   
+<script type="text/javascript" src="static/js/easyui/jquery.easyui.min.js"></script> 
+<script type="text/javascript" src="static/js/easyui/locale/easyui-lang-zh_CN.js"></script> 
+<script type="text/javascript" src="static/js/user.js"></script> 
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -17,7 +17,7 @@
     <div data-options="region:'center',border:true" >
         <table id="grid" class="easyui-datagrid" 
         	data-options="
-        	    url : '../show',//一个URL从远程站点请求数据
+        	    url : 'user?control=dataGrid',//一个URL从远程站点请求数据
         	    fit : false,//自适应布局
 	            striped : true,//是否显示斑马线效果
 	            rownumbers : true,//如果为true，则显示一个行号列
@@ -40,9 +40,10 @@
 					    <th data-options="field:'phone'" width="10%">手机号</th>
 						<th data-options="field:'email'" width="10%">邮箱</th>
 						<th data-options="field:'name'" width="5%">姓名</th>
-						<th data-options="field:'birthday'" width="10%">出生日期</th>
-						<th data-options="field:'userType'" width="5%">用户类别</th>
-						<th data-options="field:'status'" width="5%">状态</th>
+						<th data-options="field:'birthday'" width="8%">出生日期</th>
+						<th data-options="field:'sex',formatter:function(value,row,index){if(value==0){return '男';}else if(value==1){return '女';}}" width="5%">性别</th>
+						<th data-options="field:'userType',formatter:function(value,row,index){if(value==0){return '普通用户';}else if(value==1){return '管理员';}else if(value==2){return '超级管理员';}}" width="5%">用户类别</th>
+						<th data-options="field:'status',formatter:function(value,row,index){if(value==0){return '正常';}else if(value==1){return '停用';}else if(value==2){return '已删除';}}" width="5%">状态</th>
 						<th data-options="field:'createTime'" formatter="formatter_time" width="10%">创建时间</th>
 						<th data-options="field:'createdBy'" width="5%">创建人</th>
 						<th data-options="field:'updateTime'" formatter="formatter_time" width="10%">修改时间</th>
@@ -59,8 +60,8 @@
 		<div id="searchPanel" class="easyui-panel" style="width:100%;padding:5px;" data-options="border:false,collapsible:true,collapsed:false">
 		        <form id="searchForm" method="post" action="dataload">
 					<div id="searchDiv" class="list_searchDiv">
-						登陆名：<input class="easyui-textbox" style="width:100px;" name="loginName">&nbsp;&nbsp;
-						姓名：<input class="easyui-textbox" style="width:100px;" name="name">&nbsp;&nbsp;
+						登陆名：<input class="easyui-textbox" style="width:150px;" name="loginName">&nbsp;&nbsp;
+						姓名：<input class="easyui-textbox" style="width:150px;" name="name">&nbsp;&nbsp;
 						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="glyphicon-search" id="dataQuery" onclick="search_on()">搜索</a>
 						<a href="javascript:void(0);" class="easyui-linkbutton"  iconCls="icon-clear"  id="clearQuery"   onclick="clean_on();">重置</a>
 					</div>
@@ -77,6 +78,10 @@
 <div id="footBar" style="height:auto">
 	<a href="javascript:void(0)" id="saveBtn" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:false" onclick="save_on()">保存</a>
 	<a href="javascript:void(0)" id="closeBtn" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:false"  onclick="close_on()">关闭</a>
+</div>
+<div id="openWindowView" class="easyui-dialog" closed="true" data-options="iconCls:'icon-save',modal:true,buttons:'#footBarView'"></div>
+<div id="footBarView" style="height: auto">
+	<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:false" onclick="closeWindowView_on()">关闭</a>
 </div>
 </body>
 </html>

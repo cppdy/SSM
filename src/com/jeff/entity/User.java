@@ -2,6 +2,8 @@ package com.jeff.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class User {
     /**
      * 主键id
@@ -51,6 +53,7 @@ public class User {
     /**
      * 出生日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     /**
@@ -59,7 +62,7 @@ public class User {
     private String photoUrl;
 
     /**
-     * 用户类别:0.普通用户 1.管理员 3.超级管理员
+     * 用户类别:0.普通用户 1.管理员 2.超级管理员
      */
     private Integer userType;
 

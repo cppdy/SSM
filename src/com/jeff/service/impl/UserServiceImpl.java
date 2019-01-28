@@ -22,6 +22,30 @@ public class UserServiceImpl implements UserService {
         return datagrid;
     }
 
+    @Override
+    public boolean insUser(User user) {
+
+        return userMapper.insUser(user) > 0;
+    }
+
+    @Override
+    public boolean delUser(int id) {
+
+        return userMapper.delUser(id) > 0;
+    }
+
+    @Override
+    public User selUserById(int id) {
+
+        return userMapper.selUserById(id);
+    }
+
+    @Override
+    public boolean updUser(User user) {
+
+        return userMapper.updUser(user) > 0;
+    }
+
     public UserMapper getUserMapper() {
         return userMapper;
     }
