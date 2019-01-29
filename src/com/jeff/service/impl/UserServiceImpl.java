@@ -54,4 +54,23 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
     }
 
+    @Override
+    public void insDemo() {
+        User user = new User();
+        user.setLoginName("cs0129");
+        user.setPassword("123456");
+        user.setSex(0);
+        user.setUserType(0);
+        user.setStatus(0);
+        userMapper.insUser(user);
+
+        //int num = 6 / 0;
+
+        user.setId(12L);
+        user.setLoginName("xgcs0129");
+        user.setPassword("xg123456");
+        userMapper.updUser(user);
+
+    }
+
 }
