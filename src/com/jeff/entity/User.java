@@ -53,8 +53,7 @@ public class User {
     /**
      * 出生日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date birthday;
+    private String birthday;
 
     /**
      * 个人头像
@@ -163,11 +162,11 @@ public class User {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

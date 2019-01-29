@@ -12,7 +12,7 @@ function loadSuccess_on(result) {
 
 //新增
 function add_on() {	
-	var url = 'user?control=addPage';
+	var url = 'addPage';
 	//如采用默认宽度和高度,参数设置为undefined
 	var width=850;
 	var height=520;
@@ -64,7 +64,7 @@ function del_on(pkid) {
     	$.messager.confirm('询问', '您是否要删除用户信息吗？', function(b) {
             if (b) {
                 progressLoad();
-                $.post('user?control=delete', {
+                $.post('delete', {
                 	id : pkid
                 }, function(result) {
                     result = $.parseJSON(result);
@@ -88,7 +88,7 @@ function edit_on(pkid) {
     if (pkid != undefined) {
      // 选中记录
      $('#grid').datagrid('getSelected', pkid);
-   	 var url = 'user?control=editPage&&id=' + pkid;
+   	 var url = 'editPage?id=' + pkid;
 		// 如采用默认宽度和高度,参数设置为undefined
 	   	var width=850;
 		var height=520;
@@ -104,7 +104,7 @@ function view_on(pkid) {
   if (pkid != undefined) {
    // 选中记录
    $('#grid').datagrid('getSelected', pkid);
- 	 var url = 'user?control=viewPage&&id=' + pkid;
+ 	 var url = 'viewPage?id=' + pkid;
 		// 如采用默认宽度和高度,参数设置为undefined
 		var width=850;
 		var height=520;

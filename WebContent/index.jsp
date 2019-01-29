@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="user?control=manager">用户管理</a>
+<a href="user/manager">用户管理</a>
 </body>
 </html>

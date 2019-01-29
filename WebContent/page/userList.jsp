@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%--项目路径 --%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="static/js/easyui/themes/default/easyui.css">   
-<link rel="stylesheet" type="text/css" href="static/js/easyui/themes/icon.css">   
-<script type="text/javascript" src="static/js/easyui/jquery.min.js"></script>   
-<script type="text/javascript" src="static/js/easyui/jquery.easyui.min.js"></script> 
-<script type="text/javascript" src="static/js/easyui/locale/easyui-lang-zh_CN.js"></script> 
-<script type="text/javascript" src="static/js/user.js"></script> 
+<link rel="stylesheet" type="text/css" href="${path}/static/js/easyui/themes/default/easyui.css">   
+<link rel="stylesheet" type="text/css" href="${path}/static/js/easyui/themes/icon.css">   
+<script type="text/javascript" src="${path}/static/js/easyui/jquery.min.js"></script>   
+<script type="text/javascript" src="${path}/static/js/easyui/jquery.easyui.min.js"></script> 
+<script type="text/javascript" src="${path}/static/js/easyui/locale/easyui-lang-zh_CN.js"></script> 
+<script type="text/javascript" src="${path}/static/js/user.js"></script> 
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -17,7 +20,7 @@
     <div data-options="region:'center',border:true" >
         <table id="grid" class="easyui-datagrid" 
         	data-options="
-        	    url : 'user?control=dataGrid',//一个URL从远程站点请求数据
+        	    url : 'dataGrid',//一个URL从远程站点请求数据
         	    fit : false,//自适应布局
 	            striped : true,//是否显示斑马线效果
 	            rownumbers : true,//如果为true，则显示一个行号列

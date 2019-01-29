@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%--项目路径 --%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
-<link rel="stylesheet" type="text/css" href="static/js/easyui/themes/default/easyui.css">   
-<link rel="stylesheet" type="text/css" href="static/js/easyui/themes/icon.css">  
-<link rel="stylesheet" type="text/css" href="static/js/easyui/themes/color.css"> 
-<link rel="stylesheet" type="text/css" href="static/css/common.css">
-<link rel="stylesheet" type="text/css" href="static/css/icon.css">
-<script type="text/javascript" src="static/js/easyui/jquery.min.js"></script>   
-<script type="text/javascript" src="static/js/easyui/jquery.easyui.min.js"></script> 
-<script type="text/javascript" src="static/js/easyui/locale/easyui-lang-zh_CN.js"></script> 
+<link rel="stylesheet" type="text/css" href="${path}/static/js/easyui/themes/default/easyui.css">   
+<link rel="stylesheet" type="text/css" href="${path}/static/js/easyui/themes/icon.css">  
+<link rel="stylesheet" type="text/css" href="${path}/static/js/easyui/themes/color.css"> 
+<link rel="stylesheet" type="text/css" href="${path}/static/css/common.css">
+<link rel="stylesheet" type="text/css" href="${path}/static/css/icon.css">
+<script type="text/javascript" src="${path}/static/js/easyui/jquery.min.js"></script>   
+<script type="text/javascript" src="${path}/static/js/easyui/jquery.easyui.min.js"></script> 
+<script type="text/javascript" src="${path}/static/js/easyui/locale/easyui-lang-zh_CN.js"></script> 
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -74,7 +76,7 @@
                     	<label class="form_label">出生日期</label>
                     </td>
                     <td>
-                    	<fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd" />
+                    	${user.birthday}
                     </td>
                     <td>
                     	<label class="form_label">个人头像</label>
