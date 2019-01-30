@@ -2,8 +2,7 @@ package com.jeff.controller;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
@@ -13,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jeff.commons.ActionType;
 import com.jeff.commons.Result;
 import com.jeff.entity.EasyUIDatagrid;
@@ -30,27 +31,36 @@ public class UserController {
     @RequestMapping("manager")
     public String manager() {
 
-        return "/page/userList.jsp";
+        return "userList";
     }
 
     @RequestMapping("dataGrid")
     @ResponseBody
     public EasyUIDatagrid dataGrid(User user, int rows, int page) throws IOException {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("pageStart", rows * (page - 1));
-        map.put("pageSize", rows);
-        return userService.showPage(user, map);
+
+        PageHelper.startPage(page, rows);
+        // 查询全部
+        List<User> list = userService.selByPage(user);
+        // 分页代码
+        // 设置分页条件
+        PageInfo<User> pi = new PageInfo<>(list);
+        EasyUIDatagrid datagrid = new EasyUIDatagrid();
+        datagrid.setRows(pi.getList());
+        datagrid.setTotal(pi.getTotal());
+
+        return datagrid;
     }
 
     @RequestMapping("addPage")
     public String addPage() {
 
-        return "/page/userAdd.jsp";
+        return "userAdd";
     }
 
     @RequestMapping("add")
     @ResponseBody
     public Result add(User user) {
+
         user.setCreateTime(new Date());
         user.setCreatedBy("jeff");
         user.setUpdateTime(new Date());
@@ -67,7 +77,7 @@ public class UserController {
         User user = userService.selUserById(id);
         model.addAttribute("user", user);
 
-        return "/page/userEdit.jsp";
+        return "userEdit";
     }
 
     @RequestMapping("edit")
@@ -96,7 +106,8 @@ public class UserController {
 
         User user = userService.selUserById(id);
         model.addAttribute("user", user);
-        return "/page/userView.jsp";
+
+        return "userView";
     }
 
 }

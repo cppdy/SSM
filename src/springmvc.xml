@@ -19,4 +19,10 @@
 	<mvc:resources location="/static/css/" mapping="/static/css/**"></mvc:resources>
 	<mvc:resources location="/static/images/" mapping="/static/images/**"></mvc:resources>
 
+	<!-- 自定义视图解析器,如果希望不执行自定义视图解析器, 在方法返回值前面添加forward:或redirect: -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/page/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
 </beans>

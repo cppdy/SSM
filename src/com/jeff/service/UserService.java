@@ -1,13 +1,12 @@
 package com.jeff.service;
 
-import java.util.Map;
+import java.util.List;
 
-import com.jeff.entity.EasyUIDatagrid;
 import com.jeff.entity.User;
 
 public interface UserService {
 
-    EasyUIDatagrid showPage(User user, Map<String, Integer> map);
+    List<User> selByPage(User user);
 
     boolean insUser(User user);
 

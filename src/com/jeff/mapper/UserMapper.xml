@@ -7,28 +7,13 @@
 		select * from user
 		<where>
 			status!=2
-			<if test="param1.loginName!=null and param1.loginName!=''">
-				<bind name="param1.loginName" value="'%'+param1.loginName+'%'"></bind>
-				<![CDATA[and login_name like #{param1.loginName}]]>
+			<if test="loginName!=null and loginName!=''">
+				<bind name="loginName" value="'%'+loginName+'%'"></bind>
+				and login_name like #{loginName}
 			</if>
-			<if test="param1.name!=null and param1.name!=''">
-				<bind name="param1.name" value="'%'+param1.name+'%'"></bind>
-				<![CDATA[and name like #{param1.name}]]>
-			</if>
-		</where>
-		limit #{param2.pageStart},#{param2.pageSize}
-	</select>
-
-	<select id="selCountByPageInfo" resultType="long">
-		select count(*) from user
-		<where>
-			<if test="param1.loginName!=null and param1.loginName!=''">
-				<bind name="param1.loginName" value="'%'+param1.loginName+'%'"></bind>
-				<![CDATA[and login_name like #{param1.loginName}]]>
-			</if>
-			<if test="param1.name!=null and param1.name!=''">
-				<bind name="param1.name" value="'%'+param1.name+'%'"></bind>
-				<![CDATA[and name like #{param1.name}]]>
+			<if test="name!=null and name!=''">
+				<bind name="name" value="'%'+name+'%'"></bind>
+				and name like #{name}
 			</if>
 		</where>
 	</select>

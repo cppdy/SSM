@@ -1,25 +1,24 @@
 package com.jeff.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
-import com.jeff.entity.EasyUIDatagrid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.jeff.entity.User;
 import com.jeff.mapper.UserMapper;
 import com.jeff.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserMapper userMapper;
 
     @Override
-    public EasyUIDatagrid showPage(User user, Map<String, Integer> map) {
-        List<User> list = userMapper.selByPage(user, map);
-        long count = userMapper.selCountByPageInfo(user, map);
-        EasyUIDatagrid datagrid = new EasyUIDatagrid();
-        datagrid.setRows(list);
-        datagrid.setTotal(count);
-        return datagrid;
+    public List<User> selByPage(User user) {
+
+        return userMapper.selByPage(user);
     }
 
     @Override
@@ -46,14 +45,6 @@ public class UserServiceImpl implements UserService {
         return userMapper.updUser(user) > 0;
     }
 
-    public UserMapper getUserMapper() {
-        return userMapper;
-    }
-
-    public void setUserMapper(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
-
     @Override
     public void insDemo() {
         User user = new User();
@@ -64,7 +55,7 @@ public class UserServiceImpl implements UserService {
         user.setStatus(0);
         userMapper.insUser(user);
 
-        //int num = 6 / 0;
+        // int num = 6 / 0;
 
         user.setId(12L);
         user.setLoginName("xgcs0129");
